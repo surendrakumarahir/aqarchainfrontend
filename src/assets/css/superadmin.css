@@ -1,0 +1,111 @@
+/******************************
+ *  SUPER ADMIN THEME  *
+ ******************************/
+/**********************
+ * SETTINGS OVERRIDES *
+ **********************/
+@media (max-width: 1023.98px) {
+  body.has-overlay {
+    position: relative;
+    overflow-y: hidden;
+  }
+  body.has-overlay .overlay {
+    position: absolute;
+    content: " ";
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(1, 1, 1, 0.1);
+    z-index: 1;
+  }
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  z-index: 1;
+}
+
+.wrapper #sidebar {
+  min-width: 320px;
+  max-width: 320px;
+  min-height: 100vh;
+  -webkit-box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.15);
+          box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.15);
+  -webkit-transition: 0.3s -webkit-transform;
+  transition: 0.3s -webkit-transform;
+  transition: 0.3s transform;
+  transition: 0.3s transform, 0.3s -webkit-transform;
+  background-color: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+.wrapper #sidebar .navbar-brand {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #FAFAFA;
+}
+
+@media (max-width: 1023.98px) {
+  .wrapper #sidebar {
+    margin-top: -160px;
+    -webkit-transform: translateX(-320px);
+            transform: translateX(-320px);
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    min-height: calc(100vh + 160px);
+  }
+  .wrapper #sidebar.active {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .wrapper #content {
+    width: 100%;
+    position: absolute;
+  }
+}
+
+.wrapper #content .navbar {
+  height: 190px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper #content #spacer {
+  height: 48px;
+  background-color: #FEC63D;
+}
+
+@media (min-width: 1024px) {
+  .wrapper #content #spacer {
+    height: 75px;
+  }
+}
+
+.wrapper #content .superadmin-cards .superadmin-card {
+  border-radius: 10px;
+}
+
+.wrapper #content .superadmin-cards .superadmin-card .superadmin-card-header {
+  min-height: 68px;
+  border-bottom: 2px solid rgba(55, 64, 71, 0.1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+/*# sourceMappingURL=superadmin.css.map */

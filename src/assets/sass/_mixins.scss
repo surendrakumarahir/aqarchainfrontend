@@ -1,0 +1,26 @@
+@import "fonts";
+
+@mixin arca-bold() {
+  font-family: 'ArcaMajora';
+}
+
+@mixin arca-heavy() {
+  font-family: 'ArcaMajora_Heavy';
+}
+
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}  
+}
+
+@mixin top-radius {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+@mixin button-radius {
+  border-top-left-radius: 20px;
+}
+@mixin description-p {color: #787878;font-size: 13px;line-height: 1.5;}

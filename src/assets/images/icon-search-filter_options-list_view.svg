@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.36 30" class="icon-search-filter_options">
+    <title>List View</title>
+    <g id="icon-search-filter_options-list_view-1" data-name="Layer 1">
+        <g id="icon-search-filter_options-list_view-2" data-name="Layer 2">
+            <g id="icon-search-filter_options-list_view-3" data-name="Layer 3">
+                <path d="M30.38,2.73H1c-.54,0-1-.61-1-1.37S.44,0,1,0h29.4c.55,0,1,.61,1,1.36S30.93,2.73,30.38,2.73Z"/>
+                <path d="M30.38,16.36H1c-.54,0-1-.61-1-1.36s.44-1.36,1-1.36h29.4c.55,0,1,.61,1,1.36S30.93,16.36,30.38,16.36Z"/>
+                <path d="M30.38,30H1c-.54,0-1-.61-1-1.36s.44-1.37,1-1.37h29.4c.55,0,1,.61,1,1.37S30.93,30,30.38,30Z"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,26 @@
+{
+    "welcome": {
+        "title": "Welcome to {{framework}}",
+        "intro": "To get started, edit <1><0></0></1> and save to reload."
+    },
+    "comman": {
+        "view": "View",
+        "properties": "Properties",
+        "newpropertyCount": "{{count}} + New",
+        "sellers": "Sellers",
+        "buyers": "Buyers",
+        "active": "Active",
+        "inactive": "Inactive",
+        "for": "For",
+        "rent": "Rent",
+        "sell": "Sell",
+        "rented": "Rented",
+        "sold": "Sold",
+        "commercial": "Commercial",
+        "residential": "Residential",
+        "purchased": "Purchased",
+        "total": "Total",
+        "commission": "Commission",
+        "earned": "Earned"
+    }
+}

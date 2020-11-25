@@ -1,0 +1,26 @@
+{
+    "welcome": {
+        "title": "Willkommen bei {{framework}}",
+        "intro": "Zum Loslegen editiere <1><0></0></1>. Beim Speichern wird die App im Browser automatisch neu geladen."
+    },
+    "comman": {
+        "view": "رأي",
+        "properties": "الخصائص",
+        "newpropertyCount": "{{count}} + جديد",
+        "sellers": "الباعة",
+        "buyers": "المشترون",
+        "active": "نشيط",
+        "inactive": "غير نشط",
+        "for": "إلى عن على",
+        "rent": "تأجير",
+        "sell": "يبيع",
+        "rented": "مستأجر",
+        "sold": "تم البيع",
+        "commercial": "تجاري",
+        "residential": "سكني",
+        "purchased": "تم شراؤها",
+        "total": "مجموع",
+        "commission": "عمولة",
+        "earned": "حصل"
+    }
+}

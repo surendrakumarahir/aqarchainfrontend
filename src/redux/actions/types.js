@@ -5,6 +5,8 @@ export const LOADING = "LOADING";
 export const SAVE_CONFIG_DATA = "SAVE_CONFIG_DATA";
 export const LOGOUT = "LOGOUT";
 export const SAVE_LANGUAGE = "SAVE_LANGUAGE";
+export const SAVE_FILTER = "SAVE_FILTER";
+export const SAVE_PRODUCTS = "SAVE_PRODUCTS";
 
 /*ADMIN USER*/
 export const ADD_ADMIN_USER = "ADD_ADMIN_USER";

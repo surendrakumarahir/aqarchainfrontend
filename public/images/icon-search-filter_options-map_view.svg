@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.09 30" class="icon-search-filter_options">
+    <title>Map View</title>
+    <g id="icon-search-filter_options-map_view-1" data-name="Layer 1">
+        <g id="icon-search-filter_options-map_view-2" data-name="Layer 2">
+            <g id="icon-search-filter_options-map_view-3" data-name="Layer 3">
+                <path d="M10.55,0a10.55,10.55,0,0,0-9,16.09L10,29.58a.87.87,0,0,0,.74.42h0a.86.86,0,0,0,.75-.43L19.61,16A10.56,10.56,0,0,0,10.55,0ZM18.1,15.05,10.68,27.43,3.07,15.17a8.79,8.79,0,1,1,15-.12Z"/>
+                <path d="M10.55,5.27a5.28,5.28,0,1,0,5.27,5.28A5.29,5.29,0,0,0,10.55,5.27Zm0,8.8a3.53,3.53,0,1,1,3.52-3.52A3.53,3.53,0,0,1,10.55,14.07Z"/>
+            </g>
+        </g>
+    </g>
+</svg>

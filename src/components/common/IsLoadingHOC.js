@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Loader from "react-loader-spinner";
 
-const Loading = (props) => {
+const Loading = (props) => {	
 	return (
 		<div className="loaderHolder">
 			<div className="loaderMain">
@@ -18,6 +18,7 @@ const Loading = (props) => {
 };
 
 export const IsLoadingHOC =  ( WrappedComponent, loadingMessage) => {
+	
 	function HOC(props) {
 		const [isLoading, setLoading] =  useState(false);
 

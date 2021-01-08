@@ -6,11 +6,13 @@ import {
 	LOGOUT,
 	SAVE_LANGUAGE,
 	PROPERTYLIST,
+	SAVE_FILTER,
+	SAVE_PRODUCTS,
 } from "./types";
-import {defaultOptions} from "../../config";
+// import {defaultOptions} from "../../config";
 import {aqarChain} from "../../aqarchain";
-import {store} from "../store";
-let language = store.getState("app").app.language;
+// import {store} from "../store";
+// let language = store.getState("app").app.language;
 
 
 export const saveUserDataLogin = data => async dispatch => {
@@ -52,69 +54,32 @@ export const getPropertyDetails = (data) => async dispatch => {
 	});
 }; 
 
-// tokenization
-export const tokenInitialize = (data) => async dispatch => {
+export const searchProperty = (data) => async dispatch => {
 	return new Promise(async (resolve, reject) => {
-		let token = await store.getState("app").app.token;
-		console.log("token", token);
-		console.log("language", language);
-		fetch(`${defaultOptions.baseUrl}/api/token/initialize`, {
-			method: "POST",
-			headers: {
-				"Authorization":  `Bearer ${token}`,
-				localization: language ? language : "en",
-			  },
-			body: data,
-		}).then(response => {
-			console.log(response);
-			if (response.ok) {
-				return response.json();
-			}
-		}).then(responseData => {
-			// debugger;
-			console.log(responseData);
-			resolve(responseData);
-		}).catch(error => {
-			reject(error);
-		});
-		
-	
-	});
-}; 
-
-export const getApprovelDetails = (data) => async dispatch => {
-	return new Promise(async (resolve, reject) => {
-		let param = {};
-		// if(approvel) {
-		// 	param = {
-		// 		approvelKey: true
-		// 	};
-		// } else {
-		// 	param = {
-		// 		approvelKey: false
-		// 	};
-		// }
-		const response = await aqarChain.get("/api/token/approvelDetail/"+data);
-		console.log("response", response);
+		//console.log('dddd', data);
+		const response = await aqarChain.post("/api/property/search", data);
+		//console.log('data', response);
 		if (response.status === 1) {
+			dispatch({type: SAVE_PRODUCTS, payload: response.data});
 			resolve(response);
 		} else {
-			reject(response.message);
+			reject(response.response);
 		}
 	});
 }; 
 
-export const startTokenization = (data) => async dispatch => {
+export const getInTouch = (data) => async dispatch => {
 	return new Promise(async (resolve, reject) => {
-		const response = await aqarChain.put("/api/token/start/"+data);
-		console.log("response", response);
+		const response = await aqarChain.post("/api/auth/get/in/touch", data);
+		console.log('data', response);
 		if (response.status === 1) {
 			resolve(response);
 		} else {
-			reject(response.message);
+			reject(response.response);
 		}
 	});
 }; 
+ 
 
 export const logOut = () => ({
 	type: LOGOUT,
@@ -136,6 +101,43 @@ export const getConfigData = () => async dispatch => {
 	});
 }; 
 
+
+export const getCountryData = () => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		const response = await aqarChain.get("/api/property/all/countries/");
+		if (response.status === 1) {
+			dispatch({type: "COUNTRY_DATA", payload: response.data});
+			resolve(response);
+		} else {
+			reject(response.message);
+		}
+	});
+}; 
+
+export const getStateData = (data) => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		const response = await aqarChain.post("/api/property/country/wise-state/", data);
+		if (response.status === 1) {
+			//dispatch({type: "STATE_DATA", payload: response.data});
+			resolve(response);
+		} else {
+			reject(response.message);
+		}
+	});
+}; 
+
+export const getCityData = (data) => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		const response = await aqarChain.post("/api/property/state/wise-city/", data);
+		if (response.status === 1) {
+			//dispatch({type: "CITY_DATA", payload: response.data});
+			resolve(response);
+		} else {
+			reject(response.message);
+		}
+	});
+};
+
 export const loading = bool => ({
 	type: "LOADING",
 	isLoading: bool,
@@ -151,3 +153,62 @@ export const saveLanguage = language => ({
 	type: SAVE_LANGUAGE,
 	payload: language,
 });
+
+export const saveFilter  = data => ({
+	type: SAVE_FILTER,
+	payload: data,
+});
+
+export const resetFilters = () => ({
+	type: "RESET_FILTER",
+});
+
+export const viewType = (data) => ({
+	type: "VIEW_TYPE",
+	payload: data,
+});
+
+
+export const sendOtp = (data) => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		const response = await aqarChain.post("/api/auth/user/registration/send-otp/", data);
+		if (response.status === 1) {
+			resolve(response);
+		} else {
+			reject(response.message);
+		}
+	});
+};
+
+export const varifyOtp = (data) => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		const response = await aqarChain.post("/api/auth/user/registration/verify-otp/", data);
+		if (response.status === 1) {
+			resolve(response);
+		} else {
+			reject(response.message);
+		}
+	});
+};
+
+export const registerUser = (data) => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		const response = await aqarChain.post("/api/auth/register/", data);
+		if (response.status === 1) {
+			resolve(response);
+		} else {
+			reject(response.message);
+		}
+	});
+};
+
+export const companyRegistration = (data) => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		const response = await aqarChain.post("/api/property/company/regitration", data);
+		if (response.status === 1) {
+			resolve(response);
+		} else {
+			reject(response.message);
+		}
+	});
+};

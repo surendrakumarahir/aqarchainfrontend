@@ -1,8 +1,8 @@
-import {
-	ADD_ADMIN_USER,
-	ADMIN_USER_SAVE,
-} from "./types";
-import {aqarChain} from "../../aqarchain";
+// import {
+// 	ADD_ADMIN_USER,
+// 	ADMIN_USER_SAVE,
+// } from "./types";
+// import {aqarChain} from "../../aqarchain";
   
 //   export const saveUserDataLogin = data => async dispatch => {
 //     return new Promise(async (resolve, reject) => {

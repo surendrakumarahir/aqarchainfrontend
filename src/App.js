@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import "./assets/css/theme.css";
-import "react-checkbox-tree/lib/react-checkbox-tree.css";
+// import "./assets/css/theme.css";
+
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import "react-toastify/dist/ReactToastify.css";
@@ -13,6 +13,7 @@ import common_ar from "./translations/ar/common.json";
 import common_en from "./translations/en/common.json";
 import {connect} from "react-redux";
 import routes from "./Routing";
+import Footer from "./components/layout/Footer";
 //import {store} from "./redux/store";
 // let language = store.getState("app").app.language;
 // console.log('persistor', store.getState("app"));
@@ -41,6 +42,7 @@ class App extends React.Component {
 						<div id="content">
 							<Header />
 							<Switch>{routes}</Switch>
+							<Footer/>
 						</div>
 					</div>
 				</Router>

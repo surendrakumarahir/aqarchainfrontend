@@ -1,5 +1,5 @@
 import {
-	ADD_ADMIN_USER,
+	//ADD_ADMIN_USER,
 	ADMIN_USER_SAVE,
 } from "../actions/types";
 let initialState = {

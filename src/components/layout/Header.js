@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import WelcomeComponent from "../common/Welcome.component";
 
 class Header extends  React.Component {
 	render(){
@@ -48,6 +49,7 @@ class Header extends  React.Component {
 						</div>
 					</nav>
 				</div>
+				{this.props.welcome ? <WelcomeComponent />: null}
 			</header>
 		);
 	}

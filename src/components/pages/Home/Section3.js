@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from "react";
 import {connect}  from "react-redux";
-import {searchProperty} from "../../redux/actions";
+import {searchBasic} from "../../../redux/actions";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import {defaultOptions} from "../../config";
+import {defaultOptions} from "../../../config";
+import {Link} from "react-router-dom";
 
 const Section3 = (props) => {
 	
 	const [data, setData] = useState([]);
 	useEffect(() => {
-		props.searchProperty({
+		props.searchBasic({
 			"pageNumber" : 1,
 			"limit" : 10,
 			"sort": -1,
@@ -42,9 +43,9 @@ const Section3 = (props) => {
 													<div className="item" key={item._id}>
 														<div className="card property-card has-box-shadow">
 															<div className="property-image">
-																<a href="#abc">
+																<Link to={`/property-detail/${item._id}`}>
 																	<img src={`${defaultOptions.baseUrl}/${item.propPics[0]}`} alt=""/>
-																</a>
+																</Link>
 															</div>
 															<div className="card-body">
 																<div className="property-type mb-3">
@@ -55,13 +56,13 @@ const Section3 = (props) => {
 																</div>
 																<div className="property-meta">
 																	<p className="d-flex justify-content-start">
-																		<span className="mr-3">Villa</span>
+																		<span className="mr-3">{item.property_type[0].type_title}</span>
 																		<span className="mr-auto font-weight-bold">{item.currency} {item.price}</span>
 																	</p>
 																</div>
 																<div className="property-agent">
 																	<img className="property-agent-image" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt=""/>
-																	<span className="property-agent-name">Agent: <span className="font-weight-bold">Miyadh Wahid</span></span>
+																	<span className="property-agent-name">{item.belongTo[0].role}: <span className="font-weight-bold">{item.belongTo[0].first_name}</span></span>
 																</div>
 																<div className="property-specifications">
 																	<p className="mb-0 d-flex justify-content-between">
@@ -85,4 +86,4 @@ const Section3 = (props) => {
 		</section>
 	);
 };
-export default connect(null, {searchProperty})(Section3);
+export default connect(null, {searchBasic})(Section3);

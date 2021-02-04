@@ -1,7 +1,7 @@
 import React from "react";
 import {connect}  from "react-redux";
-import {getInTouch} from "../../redux/actions";
-import IsLoadingHOC from "../common/IsLoadingHOC";
+import {getInTouch} from "../../../redux/actions";
+import IsLoadingHOC from "../../common/IsLoadingHOC";
 import { ToastContainer, toast } from "react-toastify";
 class FooterHome extends  React.Component {
 	constructor(props){
@@ -167,27 +167,27 @@ render() {
 						<div className="social-icons d-flex justify-content-around align-self-stretch h-100 d-inline-block">
 							<div className="social-icon" title="Whatsapp">
 								<a href="#abc" title="Whatsapp">
-									<img src={require("../../assets/images/icon-social_media-whatsapp.svg")} alt="Whatsapp"/>
+									<img src={require("../../../assets/images/icon-social_media-whatsapp.svg")} alt="Whatsapp"/>
 								</a>
 							</div>
 							<div className="social-icon" title="Linkedin">
 								<a href="#abc" title="Linkedin">
-									<img src={require("../../assets/images/icon-social_media-linkedin.svg")} alt="Linkedin"/>
+									<img src={require("../../../assets/images/icon-social_media-linkedin.svg")} alt="Linkedin"/>
 								</a>
 							</div>
 							<div className="social-icon" title="Twitter">
 								<a href="#abc" title="Twitter">
-									<img src={require("../../assets/images/icon-social_media-twitter.svg")} alt="Twitter"/>
+									<img src={require("../../../assets/images/icon-social_media-twitter.svg")} alt="Twitter"/>
 								</a>
 							</div>
 							<div className="social-icon" title="Instagram">
 								<a href="#abc" title="Instagram">
-									<img src={require("../../assets/images/icon-social_media-instagram.svg")} alt="Instagram"/>
+									<img src={require("../../../assets/images/icon-social_media-instagram.svg")} alt="Instagram"/>
 								</a>
 							</div>
 							<div className="social-icon" title="Facebook">
 								<a href="#abc" title="Facebook">
-									<img src={require("../../assets/images/icon-social_media-facebook.svg")} alt="Facebook"/>
+									<img src={require("../../../assets/images/icon-social_media-facebook.svg")} alt="Facebook"/>
 								</a>
 							</div>
 						</div>

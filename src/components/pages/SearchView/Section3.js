@@ -36,7 +36,7 @@ class Section3 extends  React.Component {
 		this.getList();
 	}
 	handlePagination = async (activePage) => {
-		console.log("worknkajfksdj");
+		//console.log("worknkajfksdj");
 		await this.setState({activePage: activePage});
 		this.getList();
 	}

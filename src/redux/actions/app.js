@@ -68,6 +68,20 @@ export const searchProperty = (data) => async dispatch => {
 	});
 }; 
 
+export const searchBasic = (data) => async dispatch => {
+	return new Promise(async (resolve, reject) => {
+		//console.log('dddd', data);
+		const response = await aqarChain.post("/api/property/searchBasic", data);
+		//console.log('data', response);
+		if (response.status === 1) {
+			dispatch({type: SAVE_PRODUCTS, payload: response.data});
+			resolve(response);
+		} else {
+			reject(response.response);
+		}
+	});
+};
+
 export const getInTouch = (data) => async dispatch => {
 	return new Promise(async (resolve, reject) => {
 		const response = await aqarChain.post("/api/auth/get/in/touch", data);

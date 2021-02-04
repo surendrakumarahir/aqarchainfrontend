@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 // import "./assets/css/theme.css";
 
@@ -12,7 +11,7 @@ import i18next from "i18next";
 import common_ar from "./translations/ar/common.json";
 import common_en from "./translations/en/common.json";
 import {connect} from "react-redux";
-import routes from "./Routing";
+import routes from "./routing/Routing";
 import Footer from "./components/layout/Footer";
 //import {store} from "./redux/store";
 // let language = store.getState("app").app.language;
@@ -37,17 +36,9 @@ class App extends React.Component {
 		return (
 			<I18nextProvider i18n={i18next}>
 				<Router>
-					<div className="wrapper">
-						
-						<div id="content">
-							<Header />
-							<Switch>{routes}</Switch>
-							<Footer/>
-						</div>
-					</div>
+					<Switch>{routes}</Switch>
 				</Router>
 			</I18nextProvider>
-	
 		);
 	}
 }

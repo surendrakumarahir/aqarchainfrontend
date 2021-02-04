@@ -15412,3 +15412,15 @@ footer.footer #footer-form-container .social-icons .social-icon:not(:last-child)
   width: 30px;
   height: 30px;
 }
+
+/* select box */
+.select-box {
+  z-index: 4;
+}
+.select-box > div:first-child {
+  height: calc(1.6875rem + 2rem + 2px);
+}
+
+.select-box > div:first-child:hover {
+  height: calc(1.6875rem + 2rem + 2px);
+}

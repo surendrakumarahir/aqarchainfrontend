@@ -2,8 +2,11 @@ import React from "react";
 import countryCode from "../../../config/countryCode";
 import Loading from "../../common/Loading";
 import {connect}  from "react-redux";
+import {defaultOptions} from "../../../config";
 import {sendOtp, varifyOtp, getStateData, getCityData, registerUser} from "../../../redux/actions";
 import { ToastContainer, toast } from "react-toastify";
+import validator from "validator";
+import ReactFileReader from "react-file-reader";
 
 class Registration extends  React.Component {
 	constructor(props){
@@ -23,28 +26,55 @@ class Registration extends  React.Component {
 			password: "",
 			password_confirm: "",
 			email: "",
-			role: "",
-			terms: false,
+			role: "USER",
+			terms_acceptance: false,
 			first_name: "",
 			last_name: "",
 			country: "",
 			state: "",
 			city: "",
+			profile_pic: "",
 			stateData: [],
 			cityData: [],
+			errors: {
+				mobile: "",
+				country_code: "",
+				otp: "",
+				email: "",
+				password: "",
+				password_confirm: "",
+				terms_acceptance: "",
+				first_name: "",
+				last_name: "",
+				country: "",
+				state: "",
+				city: "",
+				profile_pic: "",
+			}
 		};
 	}
 	onSelectCountryCode = (value) => {
 		this.setState({country_code: value});
 	}
 	step1Completed = () => {
-		console.log("state", this.state);
-		const {country_code, mobile} = this.state;
+		const {country_code, mobile, errors} = this.state;
+		// console.log("coddd", defaultOptions.localeMobile[country_code]);
+		
 		if(country_code === "" || mobile === "") {
-			alert("country code and mobile should not be empty");
+			errors.country_code = "Country Code should not be empty";
+			errors.mobile = "Mobile number should not be empty";
+			this.setState({errors: errors});
 			return false;
 		}
-		this.setState({loading: true});
+		if (!validator.isMobilePhone(mobile, defaultOptions.localeMobile[country_code])) {
+			errors.mobile = "Mobile number is not correct";
+			this.setState({errors: errors});
+			return false;
+		}
+
+		errors.country_code = "";
+		errors.mobile= "";
+		this.setState({loading: true, errors: errors});
 		this.props.sendOtp({mobile: mobile, country_code: country_code}).then(response => {
 			console.log("response", response);
 			this.setState({step1: false, step2: true, optSendTo:response.data.to, loading: false});
@@ -56,10 +86,11 @@ class Registration extends  React.Component {
 	}
 	step2Completed = () => {
 		console.log("state", this.state);
-		const {country_code, mobile, otp} = this.state;
-		console.log("otp", otp);
+		const {country_code, mobile, otp, errors} = this.state;
 		if(otp === "") {
-			alert("OTP should not be empty");
+			//alert("OTP should not be empty");
+			errors.otp = "OTP should not be empty";
+			this.setState({errors: errors});
 			return false;
 		}
 		this.setState({loading: true});
@@ -73,52 +104,75 @@ class Registration extends  React.Component {
 		
 	}
 
-	ValidateEmail = (email)  =>
-	{
-		if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
-		{
-			return (true);
-		}
-		return (false);
-	}
-
 	step3Completed = () => {
 		this.setState({step3: false, step4: true});
 	}
 	step4Completed = () => {
-		const {email, password, password_confirm, terms, role} = this.state;
-		if(!this.ValidateEmail(email))
+		const {email, password, password_confirm, terms_acceptance, errors} = this.state;
+		let count = 0;
+		if(!validator.isEmail(email))
 		{
-			alert("You have entered an invalid email address!");
-			return false;
+			errors.email = "You have entered an invalid email address!";
+			count++;
 		}
-		if(password === "" || password_confirm === "") {
-			alert("Password and confirm password should not be empty");
-			return false;
-		} else if (password !== password_confirm) {
-			alert("Password and confirm password should be match");
-			return false;
-		} else if (!terms) {
-			alert("Please accept the terms and conditions");
-			return false;
-		} else if (role === "") {
-			alert("Role should not be empty");
-			return false;
+		if(password === "") {
+			errors.password = "Password  should not be empty";
+			count++;
+		}  if (password_confirm === "") {
+			errors.password_confirm = "Confirm password should not be empty";
+			count++;
+		}  if (!validator.equals(password, password_confirm)) {
+			errors.password = "Password and confirm password should be match";
+			count++;
+		}  if (!terms_acceptance) {
+			errors.terms_acceptance = "Please accept the terms and conditions";
+			count++;
 		}
-		this.setState({step4: false, step5: true});
+		if(count) {
+			this.setState({errors: errors});
+		} else {
+			this.setState({step4: false, step5: true});
+		}
+		
 	}
 	step5Completed = () => {
-		//this.setState({step5: false, step6: true});
-		this.setState({loading: true});
-		this.props.registerUser(this.state).then(response => {
-			console.log(response);
-			toast.success(response.message);
-			this.setState({loading: false, step5: false, step6: true});
-		}).catch(error => {
-			console.log(error);
-			this.setState({loading: false});
-			toast.error(error);
-		});
+		const {first_name, last_name, country, state, city, profile_pic, errors} = this.state;
+		let count = 0;
+		
+		if(first_name === "") {
+			errors.first_name = "First Name should not be empty";
+			count++;
+		}  if (last_name === "") {
+			errors.last_name = "Last Name should not be empty";
+			count++;
+		}  if (country === "") {
+			errors.country = "Please select country";
+			count++;
+		}  if (state === "") {
+			errors.state = "Please Select State !";
+			count++;
+		}  if (city === "") {
+			errors.city = "Please select city !";
+			count++;
+		}  if (profile_pic === "") {
+			errors.profile_pic = "Profile photo should not be empty";
+			count++;
+		} 
+		if(count) {
+			this.setState({errors: errors});
+		} else {
+			this.setState({loading: true});
+			this.props.registerUser(this.state).then(response => {
+				console.log(response);
+				toast.success(response.message);
+				this.setState({loading: false, step5: false, step6: true});
+			}).catch(error => {
+				console.log(error);
+				this.setState({loading: false});
+				toast.error(error);
+			});
+		}
+		
 	}
 	getStateData = (id) => {
 		this.props.getStateData({
@@ -169,8 +223,19 @@ class Registration extends  React.Component {
 		);
 	}
 
+	errorHtml = error => {
+		return error.length > 0 && 
+		<small className="form-text text-danger text-left">{error}</small>;
+	}
+
+	handleProfileUpload = (files) => {
+		const {errors} = this.state;
+		errors.profile_pic = "";
+		this.setState({profile_pic: files.base64, errors: errors});
+	}
+
 	render(){
-		const {step1, step2, step3, step4, step5, step6,  loading, optSendTo} = this.state;
+		const {step1, step2, step3, step4, step5, step6,  loading, optSendTo, errors} = this.state;
 		console.log(this.state);
 		return (
 			<section id="user-registration-section_1">
@@ -214,6 +279,7 @@ class Registration extends  React.Component {
 														<input type="number" 
 															onChange={(e) => this.setState({mobile: e.target.value})}
 															className="form-control secondary-input" id="mobileNumber" placeholder="Mobile Number"/>
+													    {this.errorHtml(errors.mobile)}
 													</div>
 												</div>
 											</div>
@@ -265,6 +331,7 @@ class Registration extends  React.Component {
 															 id="partitioned-otp" type="text" maxLength="6"   />
 														</div>
 													</div>
+													{this.errorHtml(errors.otp)}
 												</div>
 												<small className="form-text text-muted text-left mt-4">Didn't receive OTP? <span 
 													onClick={() => this.step1Completed()}
@@ -347,34 +414,29 @@ class Registration extends  React.Component {
 												<input 
 													onChange={(e) => this.setState({email: e.target.value})}
 													type="text" className="form-control secondary-input" id="email-id" placeholder="Email Address"/>
-												<small className="form-text text-danger text-left">*Check your mailbox for verification</small>
+												 {this.errorHtml(errors.email)}
 											</div>
 											<div className="form-group">
 												<input 
 													onChange={(e) => this.setState({password: e.target.value})}
 													type="password" className="form-control secondary-input" id="password" placeholder="Create Password"/>
+											     {this.errorHtml(errors.password)}
 											</div>
 											<div className="form-group">
 												<input 
 													onChange={(e) => this.setState({password_confirm: e.target.value})}
 													type="password" className="form-control secondary-input" id="confirm-password" placeholder="Confirm Password"/>
+											     {this.errorHtml(errors.password_confirm)}
 											</div>
-											<div className="form-group">
-												<select 
-													onChange={(e) => this.setState({role: e.target.value})}
-													className="form-control secondary-select" id="cc">
-													<option>UserType</option>
-													<option value="USER">USER</option>
-													<option value="AGENT">AGENT</option>
-												</select>
-											</div>
+										
 											<div className="form-check">
 												<input 
-													onChange={(e) => this.setState({terms: e.target.checked})}
+													onChange={(e) => this.setState({terms_acceptance: e.target.checked})}
 													className="form-check-input" type="checkbox" value="" id="termsAndConditions"/>
 												<label className="form-check-label font-weight-bold text-dark" htmlFor="termsAndConditions">
                                                      Agree to terms and conditions
 												</label>
+												{this.errorHtml(errors.terms_acceptance)}
 											</div>
 										</form>
 										<button id="signup-button" className="btn btn-gradient-secondary w-100 my-5" onClick={() => this.step4Completed()}>Sign Up</button>
@@ -415,19 +477,30 @@ class Registration extends  React.Component {
 											</div>
 										</div>
 										<div className="col-12">
-											<img alt="" className="upload-photo-icon" src="/images/upload-photo.svg"/>
-											<p className="mt-3">Upload your profile picture</p>
+											<label className="" htmlFor="company-logo">
+												<div className="image-upload">
+													<img alt="" className="upload-photo-icon mx-auto cursor" src="/images/upload-photo.svg"/>
+												    <ReactFileReader fileTypes={[".png",".jpg", ".jpeg"]} base64="true" handleFiles={this.handleProfileUpload}>
+														<button className='btn' id="company-logo">
+															<p className="mt-3">Upload your profile picture</p>
+														</button>
+													</ReactFileReader>
+													{this.errorHtml(errors.profile_pic)}
+												</div>
+											</label>	 
 										</div>
 										<form className="my-4">
 											<div className="form-group">
 												<input
 													onChange={(e) => this.setState({first_name: e.target.value})}
 													type="text" className="form-control secondary-input" id="first-name" placeholder="First Name"/>
+												{this.errorHtml(errors.first_name)}
 											</div>
 											<div className="form-group">
 												<input 
 													onChange={(e) => this.setState({last_name: e.target.value})}
 													type="text" className="form-control secondary-input" id="last-name" placeholder="Last Name"/>
+												{this.errorHtml(errors.last_name)}
 											</div>
 										</form>
 										<form className="my-2">
@@ -438,21 +511,25 @@ class Registration extends  React.Component {
 															onChange={(e) => this.setCountry(e)}
 															className="form-control secondary-select" id="country">
 															<option>Select your Country</option>
-															{
+															{/* {
 												
 																this.props.countryData.map((item, index) => {
 																	return <option key={index} value={item.id}>{item.name}</option>;
 																})
 												
-															}
+															} */}
+															<option value="101">India</option>
+															<option value="191">Saudi Arabia</option>
+															<option value="229">United Arab Emirates</option>
 														</select>
+														{this.errorHtml(errors.country)}
 													</div>
 												</div>
 												<div className="col-lg-6 col-12">
 													<div className="form-group">
 														<select 
 															onChange={(e) => this.setStateValue(e)}
-															className="form-control secondary-select" id="city">
+															className="form-control secondary-select" id="state">
 															<option>Select your State</option>
 															{
 												
@@ -462,6 +539,7 @@ class Registration extends  React.Component {
 												
 															}
 														</select>
+														{this.errorHtml(errors.state)}
 													</div>
 												</div>
 												<div className="col-lg-6 col-12">
@@ -478,6 +556,7 @@ class Registration extends  React.Component {
 												
 															}
 														</select>
+														{this.errorHtml(errors.city)}
 													</div>
 												</div>
 											</div>

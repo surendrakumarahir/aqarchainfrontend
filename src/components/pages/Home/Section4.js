@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {connect}  from "react-redux";
-import {searchProperty} from "../../redux/actions";
+import {searchBasic} from "../../../redux/actions";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import {defaultOptions} from "../../config";
+import {defaultOptions} from "../../../config";
+import {Link} from "react-router-dom";
 
 const Section4 = (props) => {
 	const [data, setData] = useState([]);
 	useEffect(() => {
-		props.searchProperty({
+		props.searchBasic({
 			"pageNumber" : 1,
 			"limit" : 10,
 			"sort": -1,
@@ -51,7 +52,9 @@ const Section4 = (props) => {
 														<div className="item" key={index}>
 															<div className="featured-property">
 																<div className="featured-property-images d-flex justify-content-center">
-																	<span className="d-none d-xl-block"><img src={`${defaultOptions.baseUrl}/${item.propPics[0]}`} alt=""/></span>
+																	<Link to={`/property-detail/${item._id}`}>
+																		<span className="d-none d-xl-block"><img src={`${defaultOptions.baseUrl}/${item.propPics[0]}`} alt=""/></span>
+																	</Link>
 																	
 																</div>
 																<div className="card property-card featured-property-card has-box-shadow">
@@ -61,13 +64,13 @@ const Section4 = (props) => {
 																		</div>
 																		<div className="property-meta">
 																			<p className="d-flex justify-content-start">
-																				<span className="mr-3">Villa</span>
-																				<span className="mr-auto font-weight-bold">AED {item.price}</span>
+																				<span className="mr-3">{item.property_type[0].type_title}</span>
+																				<span className="mr-auto font-weight-bold">{item.currency} {item.price}</span>
 																			</p>
 																		</div>
 																		<div className="property-agent">
 																			<img className="property-agent-image" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt=""/>
-																			<span className="property-agent-name">Agent: <span className="font-weight-bold">Miyadh Wahid</span></span>
+																			<span className="property-agent-name">{item.belongTo[0].role}: <span className="font-weight-bold">{item.belongTo[0].first_name}</span></span>
 																		</div>
 																		<div className="property-specifications">
 																			<p className="mb-0 d-flex justify-content-between">
@@ -93,4 +96,4 @@ const Section4 = (props) => {
 	);
 };
 
-export default connect(null, {searchProperty})(Section4);
+export default connect(null, {searchBasic})(Section4);

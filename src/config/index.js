@@ -6,4 +6,5 @@ export const defaultOptions = {
 	// googleApiKey: 'AIzaSyDuNOlGipJ7UVFTUneufRW1FG8-1pQvJYo',
 	// googleGeoLocationKey: 'AIzaSyA3lp_UtCAE2SFYcsW5QyqAcEiEdbvDEv8',
 	// stripeKey: 'sk_test_pCF33SZV2ApKfdUvWB6jykbr',
+	localeMobile: {"+971":"ar-AE", "+91": "en-IN", "+966": "ar-SA"},
 };

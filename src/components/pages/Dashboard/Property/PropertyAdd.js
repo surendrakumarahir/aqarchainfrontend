@@ -1,10 +1,11 @@
 import React from "react";
+import DashboardComponent from "../Dashboard.component";
 
-class PropertyAdd extends React.Component {
-  
-	render() {
-		return (
-			<div className="tab-pane fade" id="company-nav-tab-add-property" role="tabpanel" aria-labelledby="company-nav-tab-add-property-tab">
+const PropertyAdd = () => {
+
+	return (
+		<DashboardComponent>
+			<div className="tab-pane" id="company-nav-tab-add-property" role="tabpanel" aria-labelledby="company-nav-tab-add-property-tab">
 				<div className="text-lg-left p-4 p-lg-5 has-box-shadow">
 					<div className="row">
 						<div className="col-lg-2 col-12">
@@ -482,9 +483,9 @@ class PropertyAdd extends React.Component {
 					</div>
 				</div>
 			</div>
-								
-		);
-	}
-}
-
+		</DashboardComponent>
+	);
+	
+	
+};
 export default PropertyAdd;

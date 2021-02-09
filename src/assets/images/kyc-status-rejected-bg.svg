@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420.982" height="133.983" viewBox="0 0 420.982 133.983">
+  <defs>
+    <filter id="Path_178" x="0" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_179" x="20" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur-2"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_180" x="38" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur-3"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="KYC_Status_Box-rejected" data-name="KYC Status Box-rejected" transform="translate(-1405.274 -5145.274)">
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 5145.27)" filter="url(#Path_178)">
+      <path id="Path_178-2" data-name="Path 178" d="M1476,5160h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1420Z" transform="translate(-1405.27 -5145.27)" fill="#ec2716" opacity="0.3"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 5145.27)" filter="url(#Path_179)">
+      <path id="Path_179-2" data-name="Path 179" d="M1496,5160h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1440Z" transform="translate(-1405.27 -5145.27)" fill="#ec2716" opacity="0.5"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 5145.27)" filter="url(#Path_180)">
+      <path id="Path_180-2" data-name="Path 180" d="M1514,5160h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1458Z" transform="translate(-1405.27 -5145.27)" fill="#ec2716"/>
+    </g>
+  </g>
+</svg>

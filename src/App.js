@@ -12,7 +12,7 @@ import common_ar from "./translations/ar/common.json";
 import common_en from "./translations/en/common.json";
 import {connect} from "react-redux";
 import routes from "./routing/Routing";
-import Footer from "./components/layout/Footer";
+import { ToastContainer } from "react-toastify";
 //import {store} from "./redux/store";
 // let language = store.getState("app").app.language;
 // console.log('persistor', store.getState("app"));
@@ -38,6 +38,7 @@ class App extends React.Component {
 				<Router>
 					<Switch>{routes}</Switch>
 				</Router>
+				<ToastContainer />
 			</I18nextProvider>
 		);
 	}

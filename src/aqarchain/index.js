@@ -56,11 +56,7 @@ class AqarChain {
 					}
 					// Possible 401 or other network error
 					console.log("status", response.status);
-					if (
-						response.status === 500 ||
-            response.status === 404 ||
-            response.status === 401
-					) {
+					if (response.status === 500 || response.status === 404) {
 						let customResponse = {
 							status: 0,
 							data: {
@@ -69,7 +65,7 @@ class AqarChain {
 						};
 						return customResponse;
 						// reject(new Error(customResponse));
-					} else if(response.status === 400){
+					} else if(response.status === 400 || response.status === 401){
 						return response.json();
 					}
 					return response
@@ -84,8 +80,8 @@ class AqarChain {
 				.catch(error => {
 					console.log("error", error);
 					//const customError = this.getErrorMessageForResponce(error);
-					//reject(new Error("Something go wrong"));
-					reject(error);
+					reject(new Error("Something go wrong"));
+					//reject(error);
 				});
 		});
 	}

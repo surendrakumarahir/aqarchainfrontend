@@ -1,9 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import WelcomeComponent from "../common/Welcome.component";
+import {connect} from "react-redux";
 
 class Header extends  React.Component {
 	render(){
+		const {user} = this.props;
 		return (
 			<header className="header">
 				<div className="container-lg">
@@ -42,7 +44,13 @@ class Header extends  React.Component {
 									</div>
 								</li>
 								<li className="nav-item">
-									<Link className="nav-link" to="/user-registration">Login/Register</Link>
+								    {
+										user?._id ? 
+											<Link className="nav-link" to="/dashboard"> Welcome {user.first_name}</Link> 
+											:
+										 <Link className="nav-link" to="/user-registration">Login/Register</Link>
+									}
+									
 									{/* <a className="nav-link" href="#">Login/Register</a> */}
 								</li>
 							</ul>
@@ -55,4 +63,9 @@ class Header extends  React.Component {
 	}
 	
 }
-export default Header;
+const mapStateToProps = ({app: {user}}) => {
+	return {
+		user: user,
+	};
+};
+export default connect(mapStateToProps, null)(Header);

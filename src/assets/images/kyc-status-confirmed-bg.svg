@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420.982" height="133.983" viewBox="0 0 420.982 133.983">
+  <defs>
+    <filter id="Path_509" x="0" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_510" x="20" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur-2"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_511" x="38" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur-3"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="KYC_Status_Box" data-name="KYC Status Box" transform="translate(-1405.274 -2783.274)">
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 2783.27)" filter="url(#Path_509)">
+      <path id="Path_509-2" data-name="Path 509" d="M1476,2798h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1420Z" transform="translate(-1405.27 -2783.27)" fill="#52ce6a"/>
+    </g>
+    <rect id="Rectangle_14" data-name="Rectangle 14" width="113" height="100" rx="10" transform="translate(1413.5 2798.485)" fill="#fff" opacity="0.5"/>
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 2783.27)" filter="url(#Path_510)">
+      <path id="Path_510-2" data-name="Path 510" d="M1496,2798h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1440Z" transform="translate(-1405.27 -2783.27)" fill="#52ce6a"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 2783.27)" filter="url(#Path_511)">
+      <path id="Path_511-2" data-name="Path 511" d="M1514,2798h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1458Z" transform="translate(-1405.27 -2783.27)" fill="#28a745"/>
+    </g>
+  </g>
+</svg>

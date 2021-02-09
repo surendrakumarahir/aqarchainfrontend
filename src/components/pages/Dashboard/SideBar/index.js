@@ -1,6 +1,27 @@
 import React from "react";
+import FullName from "../../../common/FullName";
+import {useDispatch} from "react-redux";
+//import {logOut} from "../../../../redux/actions";
+import { useHistory, useLocation, Link } from "react-router-dom";
 
 const Sidebar = () => {
+	const dispatch = useDispatch();
+	let history = useHistory();
+	let location = useLocation();
+
+	const logout = () => {
+		//console.log("working");
+		dispatch({type: "LOGOUT"});
+		history.push("/");
+	};
+
+	const CustomLink = ({url, className, id, title}) => {
+		return (
+			<li className="nav-item">
+				<Link to={url} className={className} id={id}>{title}</Link>
+			</li>
+		);
+	};
 	return (
 		<nav id="sidebar">
 			<div className="sidebar-top text-center">
@@ -10,39 +31,75 @@ const Sidebar = () => {
 						<span><img alt="" className="edit-profile-pic" src="public/images/icon-edit-profile-picture-dashboard.svg"/></span>
 					</div>
 					<div className="user-details mt-2">
-						<p className="mb-0 font-weight-bold">Ahad Almuqati</p>
+						<p className="mb-0 font-weight-bold"><FullName/></p>
 					</div>
 				</div>
 			</div>
 			<ul className="nav nav-tabs nav-tabs dashboard-nav-tabs flex-column has-border-radius mt-5 mb-5" id="company-nav-tabs" role="tablist">
-				<li className="nav-item">
-					<a className="nav-link active" id="company-nav-tab-dashboard-tab" data-toggle="tab" href="#company-nav-tab-dashboard" role="tab" aria-controls="company-nav-tab-dashboard" aria-selected="true">Dashboard</a>
-				</li>
-				<li className="nav-item d-none">
-					<a className="nav-link d-none" id="company-nav-tab-add-property-tab" data-toggle="tab" href="#company-nav-tab-add-property" role="tab" aria-controls="company-nav-tab-add-property" aria-selected="false">Add Property</a>
-				</li>
-				<li className="nav-item">
-					<a className="nav-link" id="company-nav-tab-my-profile-tab" data-toggle="tab" href="#company-nav-tab-my-profile" role="tab" aria-controls="company-nav-tab-my-profile" aria-selected="false">My Profile</a>
-				</li>
-				<li className="nav-item">
-					<a className="nav-link" id="company-nav-tab-company-document-tab" data-toggle="tab" href="#company-nav-tab-company-document" role="tab" aria-controls="company-nav-tab-company-document" aria-selected="false">Company Document</a>
-				</li>
-				<li className="nav-item">
-					<a className="nav-link" id="company-nav-tab-properties-uploaded-tab" data-toggle="tab" href="#company-nav-tab-properties-uploaded" role="tab" aria-controls="company-nav-tab-properties-uploaded" aria-selected="false">Properties Uploaded</a>
-				</li>
-				<li className="nav-item">
-					<a className="nav-link" id="company-nav-tab-agent-management-tab" data-toggle="tab" href="#company-nav-tab-agent-management" role="tab" aria-controls="company-nav-tab-agent-management" aria-selected="false">Agent Management</a>
-				</li>
-				<li className="nav-item d-none">
-					<a className="nav-link d-none" id="company-nav-tab-add-agent-tab" data-toggle="tab" href="#company-nav-tab-add-agent" role="tab" aria-controls="company-nav-tab-add-agent" aria-selected="false">Add Agent</a>
-				</li>
-				<li className="nav-item">
-					<a className="nav-link" id="company-nav-tab-enquires-tab" data-toggle="tab" href="#company-nav-tab-enquires" role="tab" aria-controls="company-nav-tab-enquires" aria-selected="false">Enquires</a>
-				</li>
+				<CustomLink 
+					url="/dashboard"
+					className={`nav-link ${location.pathname === "/dashboard" ? "active" : ""}`}
+					id="company-nav-tab-dashboard-tab"
+					title="Dashboard"	  
+				/>
+				<CustomLink 
+					url="/dashboard/kyc"
+					className={`nav-link ${location.pathname === "/dashboard/kyc" ? "active" : ""}`}
+					id="user-dashboard-nav-tab-kyc-tab"
+					title="KYC"	  
+				/>
+				<CustomLink 
+					url="/dashboard/profile"
+					className={`nav-link ${location.pathname === "/dashboard/profile" ? "active" : ""}`}
+					id="company-nav-tab-my-profile-tab"
+					title="My Profile"	  
+				/>
+				<CustomLink 
+					url="/dashboard/company-profile"
+					className={`nav-link ${location.pathname === "/dashboard/company-profile" ? "active" : ""}`}
+					id="company-nav-tab-company-document-tab"
+					title="Company Document"	  
+				/>
+				<CustomLink 
+					url="/dashboard/property-listing"
+					className={`nav-link ${location.pathname === "/dashboard/property-listing" ? "active" : ""}`}
+					id="company-nav-tab-properties-uploaded-tab"
+					title="Properties Uploaded"	  
+				/>
+				<CustomLink 
+					url="/dashboard/agent"
+					className={`nav-link ${location.pathname === "/dashboard/agent" ? "active" : ""}`}
+					id="company-nav-tab-agent-management-tab"
+					title="Agent Management"	  
+				/>
+				<CustomLink 
+					url="/dashboard/enquery"
+					className={`nav-link ${location.pathname === "/dashboard/enquery" ? "active" : ""}`}
+					id="company-nav-tab-enquires-tab"
+					title="Enquires"	  
+				/>
+				<CustomLink 
+					url="/dashboard/tokenization"
+					className={`nav-link ${location.pathname === "/dashboard/tokenization" ? "active" : ""}`}
+					id="user-dashboard-nav-tab-tokenization-tab-1"
+					title="Tokenization"	  
+				/>
+				<CustomLink 
+					url="/dashboard/portfolio"
+					className={`nav-link ${location.pathname === "/dashboard/portfolio" ? "active" : ""}`}
+					id="user-dashboard-nav-tab-my-portfolio-tab"
+					title="My Portfolio"	  
+				/>
+				<CustomLink 
+					url="/dashboard/wallet"
+					className={`nav-link ${location.pathname === "/dashboard/wallet" ? "active" : ""}`}
+					id="user-dashboard-nav-tab-my-wallet-tab"
+					title="My Wallet"	  
+				/>
 			</ul>
 			<ul className="nav nav-tabs dashboard-nav-tabs has-border-radius flex-column">
 				<li className="nav-item">
-					<a href="#a" className="nav-link" id="logout">Log Out</a>
+					<div onClick={logout} className="nav-link" id="logout">Log Out</div>
 				</li>
 			</ul>
 		</nav>

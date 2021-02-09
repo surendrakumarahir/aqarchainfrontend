@@ -1,15 +1,21 @@
 import React from "react";
+import DashboardComponent from "../Dashboard.component";
+import Button from "../../../common/Button";
+import {useHistory} from "react-router-dom";
 
 const AgentManagment = () => {
+	const history = useHistory();
+	const handleClick = () => {
+		history.push("/dashboard/agent/add");
+	};
+
 	return (
-		<React.Fragment>
-			<div className="tab-pane fade" id="company-nav-tab-agent-management" role="tabpanel" aria-labelledby="company-nav-tab-agent-management-tab">
+		<DashboardComponent>
+			<div className="tab-pane" id="company-nav-tab-agent-management" role="tabpanel" aria-labelledby="company-nav-tab-agent-management-tab">
 				<div className="text-center text-lg-left p-4 p-lg-5 has-box-shadow">		
 					<div className="row d-lg-flex align-items-center">
 						<div className="col-lg-3 col-12 my-lg-0 my-3">
-							<button className="form-submit btn w-100 btn-gradient-secondary" 
-								//onClick="changeActiveTab('company-nav-tab-add-agent')"
-							>Add Agent</button>
+							<Button title="Add Agent" handleClick={handleClick} classes="form-submit btn w-100 btn-gradient-secondary"/>
 						</div>
 						<div className="col-lg-8 offset-lg-1 col-12">
 							<div id="search-filter_options" className="mb-2 mb-lg-0">
@@ -125,62 +131,9 @@ const AgentManagment = () => {
 					</div>
 				</div>
 			</div>
-								
-			<div className="tab-pane fade" id="company-nav-tab-add-agent" role="tabpanel" aria-labelledby="company-nav-tab-add-agent-tab">
-				<div className="text-center text-lg-left p-4 p-lg-5 has-box-shadow">
-					<div className="row my-4">
-						<div className="col-lg-6 col-12">
-							<div className="form-group">
-								<label htmlFor="agent-first-name">First Name</label>
-								<input type="text" className="form-control secondary-input" id="agent-first-name" value="Bishfuq"/>
-							</div>
-						</div>
-						<div className="col-lg-6 col-12">
-							<div className="form-group">
-								<label htmlFor="agent-last-name">Last Name</label>
-								<input type="text" className="form-control secondary-input" id="agent-last-name" value="Khan"/>
-							</div>
-						</div>
-					</div>
-					<div className="row my-4">
-						<div className="col-lg-6 col-12">
-							<label>Mobile Number</label>
-							<div className="form-group form-inline">
-								<select className="form-control secondary-select mr-lg-2" id="agent-mobile-no-prepend">
-									<option>+966</option>
-									<option>+91</option>
-									<option>+93</option>
-									<option>+942</option>
-									<option>+933</option>
-									<option>+955</option>
-								</select>
-								<input type="text" className="form-control secondary-input" id="agent-mobile-no" value="55 441 3171"/>
-							</div>
-						</div>
-						<div className="col-lg-6 col-12">
-							<div className="form-group">
-								<label htmlFor="agent-email-id">Email ID</label>
-								<input type="email" className="form-control secondary-input" id="agent-email-id" value="bishfuq@gmail.com"/>
-							</div>
-						</div>
-					</div>
-					<div className="row my-4">
-						<div className="col-lg-6 col-12">
-							<label htmlFor="agent-brn-number">BRN Number</label>
-							<input type="text" className="form-control secondary-input" id="agent-brn-number" value="#35378"/>
-						</div>
-					</div>
-					<div className="row my-4">
-						<div className="col-lg-3 col-md-6 col-12">
-							<button className="btn btn-gradient-secondary w-100" 
-								//onClick="changeActiveTab('company-nav-tab-agent-management')"
-							>Add</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
+		</DashboardComponent>
 	);
+	
+	
 };
-
 export default AgentManagment;

@@ -12,7 +12,7 @@ import {
 	Redirect,
 } from "react-router-dom";
   
-const PrivateRoute = ({token, adminUser, component: Component, layout: Layout, ...rest }) => {
+const PrivateRoute = ({user: {token}, adminUser, component: Component, layout: Layout, ...rest }) => {
 	return (
 		<Route {...rest} render={(props) => (
 			token ? <Layout><Component {...props} /></Layout>

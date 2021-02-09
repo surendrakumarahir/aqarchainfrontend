@@ -1,40 +1,26 @@
 import React from "react";
-import "./dashboard.css.css";
-import Sidebar from "./SideBar";
-import {SearchForm} from "../../common/Search";
-import PropertyAdd from "./Property/PropertyAdd.component";
-import Profile from "./Profile/Profile.component";
-import CompanyProfile from "./Profile/CompanyProfile.component";
-import PropertyListing from "./Property/PropertyListing.component";
-import Enquery from "./Enquery/Enquery.component";
-import AgentManagment from "./Agent/AgentManagment.component";
-import DashboardTab from "./DashboardTab";
+import Button from "../../common/Button";
+import NawBox from "./NavBox/NawBox.component";
+import DashboardComponent from "./Dashboard.component";
+import {useHistory} from "react-router-dom";
 
 const Dashboard = () => {
-
+	const history = useHistory();
+	const handleClick = () => {
+		history.push("/dashboard/property-add");
+	};
+	
 	return (
-		<main className="wrapper container-lg">
-			<Sidebar/>
-			{/* <!-- Page Content --> */}
-			<div id="content" className="flex-grow-1">
-				<div id="page-content" className="py-lg-5 pl-lg-5 p-md-2 p-3">
-					<SearchForm />
-					<div className="row no-gutters">
-						<div className="col-lg-12">
-							<div className="tab-content dashboard-nav-tabs-content" id="company-nav-tabs-content">
-								<DashboardTab/>
-								<PropertyAdd/>
-								<Profile/>
-								<CompanyProfile/>
-								<PropertyListing/>	
-								<AgentManagment/>
-								<Enquery/>
-							</div>
-						</div>
+		<DashboardComponent>
+			<div className="tab-pane"  id="company-nav-tab-dashboard" role="tabpanel" aria-labelledby="company-nav-tab-dashboard-tab">
+				<NawBox/>
+				<div className="row text-right my-4">
+					<div className="col-lg-12">
+						<Button title="Add Property" handleClick={handleClick} classes="form-submit btn btn-custom-width btn-lg btn-gradient-secondary mr-5"/>
 					</div>
 				</div>
 			</div>
-		</main>
+		</DashboardComponent>
 	);
 	
 	

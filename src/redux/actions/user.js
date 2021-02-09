@@ -4,7 +4,25 @@
 // } from "./types";
 import {aqarChain} from "../../aqarchain";
 
-  
+ 
+
+export const login = (data, dispatch) => {
+	return new Promise((resolve, reject) => {
+		aqarChain.post("/api/auth/login", data).then(response => {
+			console.log("console.log", response);
+			if (response.status === 1) {
+				dispatch({type: "USER_DATA_SAVE", payload: response.data});
+				resolve(response.message);
+			} else {
+				reject(response.message);
+			}
+		}).catch(error => {
+			reject(error);
+		});
+		//console.log(response);
+		
+	});
+};
 export const getUserList = () => async dispatch => {
 	return new Promise(async (resolve, reject) => {
 		const response = await aqarChain.get("/admin/user/");

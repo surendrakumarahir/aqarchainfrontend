@@ -1,18 +1,18 @@
 import React from "react";
 import countryCode from "../../../config/countryCode";
-import Loading from "../../common/Loading";
 import {connect}  from "react-redux";
 import {defaultOptions} from "../../../config";
 import {sendOtp, varifyOtp, getStateData, getCityData, registerUser} from "../../../redux/actions";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import validator from "validator";
 import ReactFileReader from "react-file-reader";
+import isLoadingHOC from "../../common/IsLoadingHOC";
+import Login from "./Login.component";
 
 class Registration extends  React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			loading: false,
 			step1: true,
 			step2: false,
 			step3: false,
@@ -58,6 +58,7 @@ class Registration extends  React.Component {
 	}
 	step1Completed = () => {
 		const {country_code, mobile, errors} = this.state;
+		const {setLoading} = this.props;
 		// console.log("coddd", defaultOptions.localeMobile[country_code]);
 		
 		if(country_code === "" || mobile === "") {
@@ -74,32 +75,36 @@ class Registration extends  React.Component {
 
 		errors.country_code = "";
 		errors.mobile= "";
-		this.setState({loading: true, errors: errors});
+		setLoading(true);
+		this.setState({errors: errors});
 		this.props.sendOtp({mobile: mobile, country_code: country_code}).then(response => {
 			console.log("response", response);
-			this.setState({step1: false, step2: true, optSendTo:response.data.to, loading: false});
+			setLoading(false);
+			this.setState({step1: false, step2: true, optSendTo:response.data.to});
 		}).catch(error => {
 			console.log(error);
-			this.setState({loading: false});
+			setLoading(false);
 		});
 		
 	}
 	step2Completed = () => {
 		console.log("state", this.state);
 		const {country_code, mobile, otp, errors} = this.state;
+		const {setLoading} = this.props;
 		if(otp === "") {
 			//alert("OTP should not be empty");
 			errors.otp = "OTP should not be empty";
 			this.setState({errors: errors});
 			return false;
 		}
-		this.setState({loading: true});
+		setLoading(true);
 		this.props.varifyOtp({mobile: mobile, country_code: country_code, otp: otp}).then(response => {
 			console.log("response", response);
-			this.setState({step2: false, step3: true, loading: false});
+			setLoading(false);
+			this.setState({step2: false, step3: true});
 		}).catch(error => {
 			console.log(error);
-			this.setState({loading: false});
+			setLoading(true);
 		});
 		
 	}
@@ -137,6 +142,7 @@ class Registration extends  React.Component {
 	}
 	step5Completed = () => {
 		const {first_name, last_name, country, state, city, profile_pic, errors} = this.state;
+		const {setLoading} = this.props;
 		let count = 0;
 		
 		if(first_name === "") {
@@ -161,14 +167,15 @@ class Registration extends  React.Component {
 		if(count) {
 			this.setState({errors: errors});
 		} else {
-			this.setState({loading: true});
+			setLoading(true);
 			this.props.registerUser(this.state).then(response => {
 				console.log(response);
 				toast.success(response.message);
-				this.setState({loading: false, step5: false, step6: true});
+				setLoading(false);
+				this.setState({step5: false});
 			}).catch(error => {
 				console.log(error);
-				this.setState({loading: false});
+				setLoading(false);
 				toast.error(error);
 			});
 		}
@@ -235,13 +242,11 @@ class Registration extends  React.Component {
 	}
 
 	render(){
-		const {step1, step2, step3, step4, step5, step6,  loading, optSendTo, errors} = this.state;
+		const {step1, step2, step3, step4, step5, step6, optSendTo, errors} = this.state;
 		console.log(this.state);
 		return (
 			<section id="user-registration-section_1">
-				{ loading ? <Loading />: null }
-				<ToastContainer />
-				{
+					{
 					step1 ? (
 						<div id="user-registration-section_1-signup-step1" className="container-lg">
 							<div className="row no-gutters">
@@ -470,7 +475,12 @@ class Registration extends  React.Component {
 								<div className="col-xl-5 col-lg-6 col-12">
 									<div className="py-md-5 p-5 mx-3 mx-3 has-box-shadow text-center">
 										<div className="row">
-											<div className="col-6 col-12">
+											<div className="col-6">
+												<div className="text-left">
+													<h4 onClick={() => this.setState({step5: false, step4: true})}><span> &laquo; </span>Go Back</h4>
+												</div>
+											</div>
+											<div className="col-6">
 												<div className="text-right">
 													<h4>Skip this for later <span> <img alt="" className="skip-for-later ml-1" src="/images/skip-for-later.svg"/></span></h4>
 												</div>
@@ -582,54 +592,7 @@ class Registration extends  React.Component {
 				
 				{
 					step6 ? (
-						<div id="user-registration-section_1-signup-step6" className="container-lg">
-							<div className="row no-gutters">
-								<div className="col-xl-1 col-md-12">
-									<div className="user-registration-card-bg">
-										<img alt="" className="p-4" src="/images/dots-variant-1.svg"/>
-									</div>
-								</div>
-								<div className="col-xl-5 col-lg-6 col-md-12 col-12">
-									<div className="py-md-7 p-5 mx-3 has-box-shadow">
-										<div className="form-heading my-5">
-											<h3 className="font-weight-bold text-dark">Login or Sign Up to take</h3>
-											<h3 className="font-weight-bold text-dark">your finance to a whole new level</h3>
-										</div>
-										<form className="my-4">
-											<div className="form-group">
-												<input type="text" className="form-control secondary-input" id="email-address" placeholder="Mobile Number/Email ID"/>
-											</div>
-											<div className="form-group">
-												<input type="password" className="form-control secondary-input" id="password2" placeholder="Create Password"/>
-											</div>
-											<div>
-												<div className="form-check float-left mt-1">
-													<input className="form-check-input" type="checkbox" value="" id="rememberMe"/>
-													<label className="form-check-label font-weight-bold text-dark" htmlFor="rememberMe">
-								Remember me
-													</label>
-												</div>
-												<span className="form-text text-muted text-center font-weight-bold text-dark float-right">Forgot Password?</span>
-											</div>
-										</form>
-										<button id="signup-button" className="btn btn-gradient-secondary w-100 my-6">Login</button>
-										<small className="form-text text-muted text-center">Don't have an account? <span 
-											onClick={() => this.registerStep()}
-											className="font-weight-bold text-dark">Click here to register</span></small>
-									</div>
-								</div>
-								<div className="col-lg-6 col-12 text-center text-lg-left">
-									<div className="registration-artwork-top bg-dots-variant-1 bg-position-center-right-offset bg-repeat-no-repeat p-5">
-										<h2>Take a break from</h2>
-										<h2>financial work, and focus</h2>
-										<h2>on <span className="font-weight-bold">what matters the most</span></h2>
-									</div>
-									<div className="registration-artwork-bottom">
-										<img alt="" className="img-fluid w-90" src="/images/User-Registration-Artwork.svg"/>
-									</div>
-								</div>
-							</div>
-						</div>
+						<Login registerStep={this.registerStep}/>
 					) : null
 				}
 				
@@ -645,4 +608,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, {sendOtp, varifyOtp, getCityData, getStateData, registerUser})(Registration);
+export default connect(mapStateToProps, {sendOtp, varifyOtp, getCityData, getStateData, registerUser})(isLoadingHOC(Registration, "Loading ...."));

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420.982" height="133.983" viewBox="0 0 420.982 133.983">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fbb040"/>
+      <stop offset="0.04" stop-color="#fbb040"/>
+      <stop offset="0.39" stop-color="#fec007"/>
+      <stop offset="1" stop-color="#ffde17"/>
+    </linearGradient>
+    <filter id="Path_4858" x="0" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_4859" x="20" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur-2"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_4860" x="38" y="0" width="382.982" height="133.983" filterUnits="userSpaceOnUse">
+      <feOffset dx="2.266" dy="2.266" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5.664" result="blur-3"/>
+      <feFlood flood-opacity="0"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="KYC_Status_Box-pending" data-name="KYC Status Box-pending" transform="translate(-1405.274 -3967.274)">
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 3967.27)" filter="url(#Path_4858)">
+      <path id="Path_4858-2" data-name="Path 4858" d="M1476,3982h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1420Z" transform="translate(-1405.27 -3967.27)" opacity="0.3" fill="url(#linear-gradient)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 3967.27)" filter="url(#Path_4859)">
+      <path id="Path_4859-2" data-name="Path 4859" d="M1496,3982h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1440Z" transform="translate(-1405.27 -3967.27)" opacity="0.5" fill="url(#linear-gradient)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1405.27, 3967.27)" filter="url(#Path_4860)">
+      <path id="Path_4860-2" data-name="Path 4860" d="M1514,3982h290.532c1.363,0,2.468,4.477,2.468,10v80c0,5.523-1.1,10-2.468,10H1458Z" transform="translate(-1405.27 -3967.27)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

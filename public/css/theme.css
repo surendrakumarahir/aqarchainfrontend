@@ -4965,9 +4965,9 @@ input[type="button"].btn-block {
   text-align: center;
 }
 
-.tab-content > .tab-pane {
+/* .tab-content > .tab-pane {
   display: none;
-}
+} */
 
 .tab-content > .active {
   display: block;

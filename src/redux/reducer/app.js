@@ -2,6 +2,7 @@ import {
 	SAVE_LANGUAGE,
 	SAVE_FILTER,
 	SAVE_PRODUCTS,
+	LOGOUT,
 } from "../actions/types";
 let initialState = {
 	user: {},
@@ -30,7 +31,7 @@ export default function(state = initialState, action) {
 		return {...state, token: action.token};
 	case "SAVE_CONFIG_DATA":
 		return {...state, configData: action.payload};
-	case "LOGOUT": 
+	case LOGOUT: 
 		return {...state, user: {}, token: ""};
 	case "PROPERTYLIST":
 		return {...state, propertyList: action.payload};
